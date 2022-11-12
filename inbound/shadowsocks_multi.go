@@ -12,7 +12,7 @@ import (
 	C "github.com/sagernet/sing-box/constant"
 	"github.com/sagernet/sing-box/log"
 	"github.com/sagernet/sing-box/option"
-	"github.com/sagernet/sing-shadowsocks/shadowaead"
+	"github.com/dunwide/sing-shadowsocks/shadowaead_2022"
 	"github.com/sagernet/sing/common"
 	"github.com/sagernet/sing/common/auth"
 	"github.com/sagernet/sing/common/buf"
@@ -28,7 +28,7 @@ var (
 
 type ShadowsocksMulti struct {
 	myInboundAdapter
-	service        *shadowaead.MultiService[int]
+	service        *shadowaead_2022.MultiService[int]
 	users          []option.ShadowsocksUser
 	controlEnabled bool
 	controller     *http.Server
@@ -56,7 +56,7 @@ func newShadowsocksMulti(ctx context.Context, router adapter.Router, logger log.
 	} else {
 		udpTimeout = int64(C.UDPTimeout.Seconds())
 	}
-	service, err := shadowaead.NewMultiServiceWithPassword[int](
+	service, err := shadowaead_2022.NewMultiServiceWithPassword[int](
 		options.Method,
 		options.Password,
 		udpTimeout,
